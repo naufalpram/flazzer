@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { experimental_useObject } from "ai/react";
+import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { questionsSchema } from "@/lib/schemas";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -34,7 +34,7 @@ export default function ChatWithFiles() {
     submit,
     object: partialQuestions,
     isLoading,
-  } = experimental_useObject({
+  } = useObject({
     api: "/api/generate-quiz",
     schema: questionsSchema,
     initialValue: undefined,
