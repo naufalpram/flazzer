@@ -1,15 +1,19 @@
+import { getServerConfig } from "@/lib/firebaseAdmin";
 import { questionSchema, questionsSchema } from "@/lib/schemas";
 import { google } from "@ai-sdk/google";
 import { streamObject } from "ai";
 
 export const maxDuration = 60;
 
-export async function POST(req: Request) {
+export async function POST(req: Request) {  
+  const serverConfig = await getServerConfig();
+  const modelName = serverConfig?.getString('model_name') ?? 'gemini-1.5-flash-latest';
+
   const { files } = await req.json();
   const firstFile = files[0].data;
 
   const result = streamObject({
-    model: google("gemini-1.5-flash-latest"),
+    model: google(modelName),
     messages: [
       {
         role: "system",

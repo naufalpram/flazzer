@@ -1,12 +1,15 @@
 "use server";
 
+import { getServerConfig } from "@/lib/firebaseAdmin";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
 import { z } from "zod";
 
 export const generateQuizTitle = async (file: string) => {
+  const serverConfig = await getServerConfig();
+  const modelName = serverConfig?.getString('model_name') ?? 'gemini-1.5-flash-latest';
   const result = await generateObject({
-    model: google("gemini-1.5-flash-latest"),
+    model: google(modelName),
     schema: z.object({
       title: z
         .string()
