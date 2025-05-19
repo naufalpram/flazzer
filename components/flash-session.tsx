@@ -33,7 +33,6 @@ export default function FlashSession({
   const [progress, setProgress] = useState(0);
 
   const [prevAnswer, setPrevAnswer] = useState<string | null>(null);
-  const [hoverAnswer, setHoverAnswer] = useState<'Got It' | 'Study Again' | 'Idle'>('Idle');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -108,14 +107,12 @@ export default function FlashSession({
                 {!isSubmitted ? (
                   <div className="space-y-20 relative">
                     <div className={cn("flash-cards-container w-full h-full flex justify-center items-center transition-transform")}>
-                        <FlashCard number={currentQuestionIndex + 1} question={currentQuestion.question} answer={currentQuestion.answer} hoverAnswer={hoverAnswer}  />
+                        <FlashCard number={currentQuestionIndex + 1} question={currentQuestion.question} answer={currentQuestion.answer}  />
                     </div>
                     <div className="flex justify-between items-center pt-4">
                       <Button
                         onClick={() => handleSwipeCard('Study Again')}
                         variant="ghost"
-                        onMouseEnter={() => setHoverAnswer('Study Again')}
-                        onMouseLeave={() => setHoverAnswer('Idle')}
                       >
                         <ChevronLeft className="mr-2 h-4 w-4" /> Study Again
                       </Button>
@@ -125,8 +122,6 @@ export default function FlashSession({
                       <Button
                         onClick={() => handleSwipeCard('Got It')}
                         variant="ghost"
-                        onMouseEnter={() => setHoverAnswer('Got It')}
-                        onMouseLeave={() => setHoverAnswer('Idle')}
                       >
                         Got It
                         <ChevronRight className="ml-2 h-4 w-4" />
