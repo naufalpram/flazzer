@@ -7,7 +7,7 @@ export const maxDuration = 60;
 
 export async function POST(req: Request) {  
   const serverConfig = await getServerConfig();
-  const modelName = serverConfig?.getString('model_name') ?? 'gemini-1.5-flash-latest';
+  const modelName = serverConfig?.getString('model_name') ?? 'gemini-2.5-flash';
 
   const { files } = await req.json();
   const firstFile = files[0].data;
