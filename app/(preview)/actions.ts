@@ -6,8 +6,7 @@ import { generateObject } from "ai";
 import { z } from "zod";
 
 export const generateQuizTitle = async (file: string) => {
-  const serverConfig = await getServerConfig();
-  const modelName = serverConfig?.getString('model_name') ?? 'gemini-2.5-flash';
+  const modelName = 'gemini-2.0-flash';
   const result = await generateObject({
     model: google(modelName),
     schema: z.object({
